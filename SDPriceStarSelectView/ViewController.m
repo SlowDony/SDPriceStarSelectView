@@ -46,22 +46,17 @@
 }
 -(void)btnClick:(UIButton *)sender{
 //    __weak __typeof__(self) weakSelf = self;
-  
-    
-   // priceStarView =[[SDPriceStarView alloc]initWithFrame:CGRectMake(0, 0, mDeviceWidth, mDeviceHeight)AndJiageArr:jgArr AndXingjiArr:xjArr];
     SDPriceStarView *priceStarView =[SDPriceStarView sdPriceStarView];
     
-    
-    priceStarView.sdJiageBlock=^(NSString *jiageID){
+    priceStarView.sdPriceBlock=^(NSString *priceID){
         
-        NSLog(@"价格ID:%@",jiageID);
-        
-        
-        
+        NSLog(@"价格ID:%@",priceID);
+
     };
     
-    priceStarView.sdXingjiBlock=^(NSString *xingjiID){
-        NSLog(@"星级ID:%@",xingjiID);
+    priceStarView.sdStarBlock=^(NSString *starID){
+        
+        NSLog(@"星级ID:%@",starID);
         
     };
     

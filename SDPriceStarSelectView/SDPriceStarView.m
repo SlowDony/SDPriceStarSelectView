@@ -28,28 +28,43 @@
 
 
 @interface SDPriceStarView ()
-
-{
-    NSMutableArray *subSmallArr; //星级选择
-    NSMutableArray* jiageArr; //价格
-    NSMutableArray* xingjiArr; //星际
-    UIView *bjTableView;
-    
-    UIView *jiageV; //价格v
-    UIView *xingjiV; //星级v
-    NSString *subStr;  //星级选择
-}
+<UIGestureRecognizerDelegate>
 
 
-@property (nonatomic,strong)UIView *starView; //星级view
-@property (nonatomic,strong)UIView *priceView; //价格view
-@property (nonatomic,strong)UIView *bjView ;  //背景
-/*
-确定按钮
+
+/**
+ 星级选择数组
+ */
+@property (nonatomic,strong)NSMutableArray *starSelectArr;
+/**
+ 星级选择
+ */
+@property (nonatomic,strong)NSString *starSelectStr;
+
+/**
+ 星级view
+ */
+@property (nonatomic,strong)UIView *starView;
+
+/**
+ 价格view
+ */
+@property (nonatomic,strong)UIView *priceView;
+
+/**
+  背景
+ */
+@property (nonatomic,strong)UIView *bjView ;
+
+/**
+ 确定按钮
  */
 @property (nonatomic,strong)UIButton *sureBtn;
 
-@property (nonatomic,strong)UIButton *cancelBtn;//取消按钮
+/**
+ 取消按钮
+ */
+@property (nonatomic,strong)UIButton *cancelBtn;
 
 
 
@@ -66,96 +81,6 @@
     // Drawing code
 }
 */
-
--(UIView *)starView{
-    if (!_starView){
-        _starView =[[UIView alloc]init];
-        _starView.backgroundColor=[UIColor whiteColor];
-        _starView.frame=CGRectMake(0, 150,mDeviceWidth, 140);
-        [_starView setUserInteractionEnabled:YES];
-        
-        UILabel *starLabel = [[UILabel alloc] init];
-        starLabel.frame = CGRectMake(20,0,mDeviceWidth, 40);
-        starLabel.backgroundColor = [UIColor clearColor];
-        starLabel.textColor = fontHightColor;
-        starLabel.text = @"星级";
-        starLabel.textAlignment = NSTextAlignmentLeft;
-        starLabel.font = [UIFont systemFontOfSize:14];
-        starLabel.numberOfLines = 0;
-        [_starView addSubview:starLabel];
-        
-        
-    }
-    return _starView;
-}
-
--(UIView *)priceView{
-    if (!_priceView){
-        _priceView =[[UIView alloc]init];
-        _priceView.backgroundColor=[UIColor whiteColor];
-        _priceView.frame=CGRectMake(0, 40,mDeviceWidth, 70+40);
-        [_priceView setUserInteractionEnabled:YES];
-        
-        UILabel *priceLabel = [[UILabel alloc] init];
-        priceLabel.frame = CGRectMake(20,0,mDeviceWidth, 40);
-        priceLabel.backgroundColor = [UIColor clearColor];
-        priceLabel.textColor = fontHightColor;
-        priceLabel.text = @"价格";
-        priceLabel.textAlignment = NSTextAlignmentLeft;
-        priceLabel.font = [UIFont systemFontOfSize:14];
-        priceLabel.numberOfLines = 0;
-        
-        [_priceView addSubview:priceLabel];
-
-    }
-    return _priceView;
-}
-
--(UIView *)bjView{
-    if (!_bjView) {
-        _bjView =[[UIView alloc]init];
-        _bjView.frame=CGRectMake(0, mDeviceHeight,mDeviceWidth, 0);
-        _bjView.backgroundColor=[UIColor redColor];
-        [_bjView addSubview:self.cancelBtn];
-        [_bjView addSubview:self.sureBtn];
-        [_bjView addSubview:self.priceView];
-        [_bjView addSubview:self.starView];
-    }
-    
-    return _bjView;
-}
-
--(UIButton *)sureBtn{
-   
-    if (!_sureBtn) {
-        //确认
-        _sureBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _sureBtn.frame = CGRectMake(mDeviceWidth-60, 0, 40, 40);
-        [_sureBtn setTitle:@"确认" forState:UIControlStateNormal];
-        [_sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _sureBtn.titleLabel.font =[UIFont systemFontOfSize:14];
-        [_sureBtn  addTarget:self action:@selector(chongzhiClicked:) forControlEvents:UIControlEventTouchUpInside];
-        _sureBtn.tag=299;
-    }
-    return _sureBtn;
-}
-
--(UIButton *)cancelBtn{
-    if (!_sureBtn){
-        //取消
-        _cancelBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _cancelBtn.frame = CGRectMake(20, 0, 40, 40);
-        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _cancelBtn.titleLabel.font =[UIFont systemFontOfSize:14];
-        [_cancelBtn  addTarget:self action:@selector(chongzhiClicked:) forControlEvents:UIControlEventTouchUpInside];
-        _cancelBtn.tag=199;
-    }
-    return _cancelBtn;
-}
-
-
-
 -(NSMutableArray *)starArr{
     if (!_starArr) {
         
@@ -181,12 +106,11 @@
                            @{@"title":@"¥601-1000",@"value":@"5"},
                            @{@"title":@"¥1000以上",@"value":@"6"},
                            ];
-       
+        
         _priceArr =[[NSMutableArray alloc]initWithArray:arr];
     }
     return _priceArr;
 }
-
 
 
 //-(void)setStarArr:(NSMutableArray *)starArr{
@@ -206,28 +130,22 @@
     [starView setUI];
     return starView;
 }
-
-
-- (instancetype)initWithFrame:(CGRect)frame AndJiageArr:(NSArray *)jgArr AndXingjiArr:(NSArray *)xjArr
+- (instancetype)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
-        jiageArr =[[NSMutableArray alloc]initWithArray:jgArr];
-        xingjiArr =[[NSMutableArray alloc]initWithArray:xjArr];
-        
-        
-        
-        [self setUI];
         
     }
     return self;
 }
 
+/**
+ 初始化
+ */
 -(void)setUI{
     
     
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-    subSmallArr =[[NSMutableArray alloc]init];
 
     self.frame =CGRectMake(0, 0, mDeviceWidth, mDeviceHeight);
     [self addSubview:self.bjView];
@@ -235,26 +153,25 @@
     [UIView animateWithDuration:0.25 animations:^{
         self.bjView.frame=CGRectMake(0, mDeviceHeight -bjviewheight,mDeviceWidth, bjviewheight);
     }];
-   
-    //
-    
-    [self setupBtnWithBtnArr:self.priceArr];
-
-    [self setupBtnWithXijiBtnArr:self.starArr];
+    //点击手势
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeView)];
+    tap.delegate = self;
+    [self addGestureRecognizer:tap];
     
 }
 
-/**
- *  添加九宫格按钮
- */
--(void)setupBtnWithBtnArr:(NSMutableArray *)arr {
+
+
+
+#pragma mark - 选择价格(单选)
+-(void)setupPriceBtnWithPriceArr:(NSMutableArray *)priceArr {
     
     //
     int totalloc =4;
     CGFloat btnVW = (mDeviceWidth-10*5)/4; //宽
     CGFloat btnVH = 30; //高
     CGFloat margin =10; //间距
-    int count =(int)arr.count;
+    int count =(int)priceArr.count;
     for (int i=0;i<count;i++){
         int row =i/totalloc;  //行号
         int loc =i%totalloc;  //列号
@@ -263,7 +180,7 @@
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(btnVX, btnVY, btnVW, btnVH);
-        [btn setTitle:[NSString stringWithFormat:@"%@",arr[i][@"title"]] forState:UIControlStateNormal];
+        [btn setTitle:[NSString stringWithFormat:@"%@",priceArr[i][@"title"]] forState:UIControlStateNormal];
         
         [btn setTitleColor:fontHightRedColor forState:UIControlStateSelected];
         [btn setTitleColor:fontNomalColor forState:UIControlStateNormal];
@@ -273,17 +190,51 @@
         btn.layer.borderColor =[UIColor colorWithWhite:0.6 alpha:1].CGColor;
         
         btn.layer.borderWidth=0.6;
-        [btn  addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btn  addTarget:self action:@selector(priceBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.priceView addSubview: btn];
     }
 }
--(void)btnClick:(UIButton *)cender{
+
+#pragma mark - 选择星级(多选)
+
+-(void)setupStarBtnWithStarArr:(NSArray *)starArr {
+    
+    //
+    int totalloc =3;
+    CGFloat btnVW = (mDeviceWidth-10*4)/3; //宽
+    CGFloat btnVH = 30; //高
+    CGFloat margin =10; //间距
+    int count =(int)starArr.count;
+    for (int i=0;i<count;i++){
+        int row =i/totalloc;  //行号
+        int loc =i%totalloc;  //列号
+        CGFloat btnVX =margin+(margin +btnVW)*loc;
+        CGFloat btnVY =40+(margin +btnVH)*row;
+        
+        UIButton *starBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        starBtn.frame = CGRectMake(btnVX, btnVY, btnVW, btnVH);
+        [starBtn setTitle:[NSString stringWithFormat:@"%@",starArr[i][@"title"]] forState:UIControlStateNormal];
+        [starBtn setTitleColor:fontHightRedColor forState:UIControlStateSelected];
+        [starBtn setTitleColor:fontNomalColor forState:UIControlStateNormal];
+        starBtn.titleLabel.font =[UIFont systemFontOfSize:10];
+        starBtn.tag=i+100;
+        starBtn.layer.cornerRadius=5;
+        starBtn.layer.borderColor =[UIColor colorWithWhite:0.6 alpha:1].CGColor;
+        starBtn.layer.borderWidth=0.6;
+        [starBtn  addTarget:self action:@selector(starBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.starView addSubview: starBtn];
+    }
+}
+
+
+#pragma mark - 按钮点击
+-(void)priceBtnClick:(UIButton *)priceBtn{
     
     for (int i=0;i<self.priceArr.count;i++){
         
         UIButton *btn = [self viewWithTag:i+1000];
         
-        if(btn.tag!=cender.tag){
+        if(btn.tag!=priceBtn.tag){
             btn.layer.borderColor =[UIColor colorWithWhite:0.6 alpha:1].CGColor;
             btn.layer.borderWidth=0.6;
             btn.selected=NO;
@@ -295,8 +246,8 @@
             btn.selected=YES;
             
             
-            if (self.sdJiageBlock){
-                self.sdJiageBlock([self.priceArr[i] objectForKey:@"value"]  );
+            if (self.sdPriceBlock){
+                self.sdPriceBlock([self.priceArr[i] objectForKey:@"value"]  );
             }
             
             
@@ -304,44 +255,19 @@
     }
 }
 
-#pragma mark - 选择星级标签
 
--(void)setupBtnWithXijiBtnArr:(NSArray *)arr {
-    
-    //
-    int totalloc =3;
-    CGFloat btnVW = (mDeviceWidth-10*4)/3; //宽
-    CGFloat btnVH = 30; //高
-    CGFloat margin =10; //间距
-    int count =(int)arr.count;
-    for (int i=0;i<count;i++){
-        int row =i/totalloc;  //行号
-        int loc =i%totalloc;  //列号
-        CGFloat btnVX =margin+(margin +btnVW)*loc;
-        CGFloat btnVY =40+(margin +btnVH)*row;
-        
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(btnVX, btnVY, btnVW, btnVH);
-        [btn setTitle:[NSString stringWithFormat:@"%@",arr[i][@"title"]] forState:UIControlStateNormal];
-        [btn setTitleColor:fontHightRedColor forState:UIControlStateSelected];
-        [btn setTitleColor:fontNomalColor forState:UIControlStateNormal];
-        btn.titleLabel.font =[UIFont systemFontOfSize:10];
-        btn.tag=i+100;
-        btn.layer.cornerRadius=5;
-        btn.layer.borderColor =[UIColor colorWithWhite:0.6 alpha:1].CGColor;
-        btn.layer.borderWidth=0.6;
-        [btn  addTarget:self action:@selector(btnClicke1:) forControlEvents:UIControlEventTouchUpInside];
-        [self.starView addSubview: btn];
-    }
-}
 
--(void)btnClicke1:(UIButton *)sender{
+/**
+ 星级btn点击
+
+ */
+-(void)starBtnClick:(UIButton *)starBtn{
     
-    if (sender.tag == 100) {
+    if (starBtn.tag == 100) {
         
-        [subSmallArr removeAllObjects];
-        sender.layer.borderColor=fontHightRedColor.CGColor;
-        sender.selected = YES;
+        [self.starSelectArr removeAllObjects];
+        starBtn.layer.borderColor=fontHightRedColor.CGColor;
+        starBtn.selected = YES;
         
         for ( int i =1; i<5; i++) {
             
@@ -358,39 +284,36 @@
         button.selected = NO;
         button.layer.borderColor=[UIColor colorWithWhite:0.6 alpha:1].CGColor;
         
-        sender.selected = !sender.selected;
+        starBtn.selected = !starBtn.selected;
         
-        if (sender.selected) {
+        if (starBtn.selected) {
             
-            [subSmallArr addObject:self.starArr[sender.tag - 100][@"value"]];
-            sender.layer.borderColor=fontHightRedColor.CGColor;
+            [self.starSelectArr addObject:self.starArr[starBtn.tag - 100][@"value"]];
+            starBtn.layer.borderColor=fontHightRedColor.CGColor;
         }else {
-            sender.layer.borderColor=[UIColor colorWithWhite:0.6 alpha:1].CGColor;
-            [subSmallArr removeObject:self.starArr[sender.tag - 100][@"value"]];
+            starBtn.layer.borderColor=[UIColor colorWithWhite:0.6 alpha:1].CGColor;
+            [self.starSelectArr removeObject:self.starArr[starBtn.tag - 100][@"value"]];
         }
         
     }
     
-    subStr  =[subSmallArr componentsJoinedByString:@","];
-    NSLog(@"subStr:%@",subStr);
+    self.starSelectStr  =[self.starSelectArr componentsJoinedByString:@","];
+    NSLog(@"subStr:%@",self.starSelectStr);
     
-    if (self.sdXingjiBlock) {
-        self.sdXingjiBlock (subStr);
+    if (self.sdStarBlock) {
+        self.sdStarBlock (self.starSelectStr);
     }
     
 }
 
 
--(void)chongzhiClicked:(UIButton *)sender{
+/**
+ 取消/确定按钮
+ */
+-(void)sureBtnClicked:(UIButton *)sender{
     
     
-    [UIView animateWithDuration:0.25 animations:^{
-        self.bjView.frame =CGRectMake(0, mDeviceHeight, mDeviceWidth, 0);
-
-    } completion:^(BOOL finished) {
-         [self removeFromSuperview];
-    }];
-    
+    [self removeView];
   
   
     if (sender.tag ==199){ //取消
@@ -402,6 +325,137 @@
         
         
     }
+}
+
+/**
+ 移除view
+ */
+-(void)removeView{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.bjView.frame =CGRectMake(0, mDeviceHeight, mDeviceWidth, 0);
+        
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+    
+}
+
+
+
+/**
+ 星级view
+ */
+-(UIView *)starView{
+    if (!_starView){
+        _starView =[[UIView alloc]init];
+        _starView.backgroundColor=[UIColor whiteColor];
+        _starView.frame=CGRectMake(0, 150,mDeviceWidth, 140);
+        [_starView setUserInteractionEnabled:YES];
+        
+        UILabel *starLabel = [[UILabel alloc] init];
+        starLabel.frame = CGRectMake(20,0,mDeviceWidth, 40);
+        starLabel.backgroundColor = [UIColor clearColor];
+        starLabel.textColor = fontHightColor;
+        starLabel.text = @"星级";
+        starLabel.textAlignment = NSTextAlignmentLeft;
+        starLabel.font = [UIFont systemFontOfSize:14];
+        starLabel.numberOfLines = 0;
+        [_starView addSubview:starLabel];
+        [self setupStarBtnWithStarArr:self.starArr];
+    }
+    return _starView;
+}
+
+/**
+ 价格view
+ */
+-(UIView *)priceView{
+    if (!_priceView){
+        _priceView =[[UIView alloc]init];
+        _priceView.backgroundColor=[UIColor whiteColor];
+        _priceView.frame=CGRectMake(0, 40,mDeviceWidth, 70+40);
+        [_priceView setUserInteractionEnabled:YES];
+        
+        UILabel *priceLabel = [[UILabel alloc] init];
+        priceLabel.frame = CGRectMake(20,0,mDeviceWidth, 40);
+        priceLabel.backgroundColor = [UIColor clearColor];
+        priceLabel.textColor = fontHightColor;
+        priceLabel.text = @"价格";
+        priceLabel.textAlignment = NSTextAlignmentLeft;
+        priceLabel.font = [UIFont systemFontOfSize:14];
+        priceLabel.numberOfLines = 0;
+        
+        [_priceView addSubview:priceLabel];
+        [self setupPriceBtnWithPriceArr:self.priceArr];
+        
+    }
+    return _priceView;
+}
+
+/**
+ 背景view
+ */
+-(UIView *)bjView{
+    if (!_bjView) {
+        _bjView =[[UIView alloc]init];
+        _bjView.frame=CGRectMake(0, mDeviceHeight,mDeviceWidth, 0);
+        _bjView.backgroundColor=[UIColor redColor];
+        [_bjView addSubview:self.cancelBtn];
+        [_bjView addSubview:self.sureBtn];
+        [_bjView addSubview:self.priceView];
+        [_bjView addSubview:self.starView];
+    }
+    
+    return _bjView;
+}
+
+
+/**
+ 确定按钮
+ */
+-(UIButton *)sureBtn{
+    
+    if (!_sureBtn) {
+        //确认
+        _sureBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        _sureBtn.frame = CGRectMake(mDeviceWidth-60, 0, 40, 40);
+        [_sureBtn setTitle:@"确认" forState:UIControlStateNormal];
+        [_sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _sureBtn.titleLabel.font =[UIFont systemFontOfSize:14];
+        [_sureBtn  addTarget:self action:@selector(sureBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        _sureBtn.tag=299;
+    }
+    return _sureBtn;
+}
+
+/**
+ 取消按钮
+ */
+-(UIButton *)cancelBtn{
+    if (!_sureBtn){
+        //取消
+        _cancelBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        _cancelBtn.frame = CGRectMake(20, 0, 40, 40);
+        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _cancelBtn.titleLabel.font =[UIFont systemFontOfSize:14];
+        [_cancelBtn  addTarget:self action:@selector(sureBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        _cancelBtn.tag=199;
+    }
+    return _cancelBtn;
+}
+
+
+/**
+ 星级arr选择
+
+ */
+-(NSMutableArray *)starSelectArr{
+    if (!_starSelectArr){
+        _starSelectArr =[NSMutableArray array];
+        
+    }
+    return _starSelectArr;
 }
 
 @end
