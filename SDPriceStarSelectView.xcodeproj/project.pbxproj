@@ -16,6 +16,7 @@
 		180EAD461E3597E30057C246 /* SDPriceStarSelectViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 180EAD451E3597E30057C246 /* SDPriceStarSelectViewTests.m */; };
 		180EAD511E3597E30057C246 /* SDPriceStarSelectViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 180EAD501E3597E30057C246 /* SDPriceStarSelectViewUITests.m */; };
 		180EAD601E35986C0057C246 /* SDPriceStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180EAD5F1E35986C0057C246 /* SDPriceStarView.m */; };
+		EF63BFEC1F24F1A0009F5EA9 /* sdpricestarview.gif in Resources */ = {isa = PBXBuildFile; fileRef = EF63BFEB1F24F1A0009F5EA9 /* sdpricestarview.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		180EAD521E3597E30057C246 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		180EAD5E1E35986C0057C246 /* SDPriceStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPriceStarView.h; sourceTree = "<group>"; };
 		180EAD5F1E35986C0057C246 /* SDPriceStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPriceStarView.m; sourceTree = "<group>"; };
+		EF63BFEB1F24F1A0009F5EA9 /* sdpricestarview.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sdpricestarview.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		180EAD2B1E3597E20057C246 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EF63BFEB1F24F1A0009F5EA9 /* sdpricestarview.gif */,
 				180EAD2C1E3597E20057C246 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -253,6 +256,7 @@
 			files = (
 				180EAD3B1E3597E20057C246 /* LaunchScreen.storyboard in Resources */,
 				180EAD381E3597E20057C246 /* Assets.xcassets in Resources */,
+				EF63BFEC1F24F1A0009F5EA9 /* sdpricestarview.gif in Resources */,
 				180EAD361E3597E20057C246 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +515,7 @@
 				180EAD571E3597E30057C246 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		180EAD581E3597E30057C246 /* Build configuration list for PBXNativeTarget "SDPriceStarSelectViewTests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +524,7 @@
 				180EAD5A1E3597E30057C246 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		180EAD5B1E3597E30057C246 /* Build configuration list for PBXNativeTarget "SDPriceStarSelectViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +533,7 @@
 				180EAD5D1E3597E30057C246 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
