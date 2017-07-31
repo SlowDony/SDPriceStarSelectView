@@ -5,6 +5,14 @@
 //  Created by apple on 2017/1/23.
 //  Copyright © 2017年 slowdony. All rights reserved.
 //
+/*
+ github: https://github.com/SlowDony/SDPriceStarSelectView
+ 如果有好的建议或者意见 ,欢迎指出.
+ 我的邮箱：devslowdony@gmail.com
+ 您的支持是对我最大的鼓励,谢谢. 求STAR ..😆
+ */
+
+
 
 #import "SDPriceStarView.h"
 
